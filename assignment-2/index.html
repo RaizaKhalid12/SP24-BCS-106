@@ -1,1 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- THIS IS THE MOST IMPORTANT LINE — without it mobile browsers zoom out and misreport width -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mazton Skin Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style4.css">
+</head>
+<body>
 
+<!-- FREE SHIPPING BAR -->
+<div id="fsb_bar" class="fsb_bar">
+  <div id="fsb_message" class="fsb_message" tabindex="0" role="text" aria-label="FREE SHIPPING on orders above ₨1500">
+    <span class="fsb_msg_inner">
+      <span>FREE SHIPPING on orders above </span>
+      <span id="fsb_symbol" class="fsb_symbol">₨</span>
+      <span id="fsb_amount" class="fsb_amount">1500</span>
+    </span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <a href="/"><img src="maztonologo.jpg" alt="Mazton Skin Solutions"></a>
+  </div>
+
+  <!-- HAMBURGER BUTTON (visible only on mobile/tablet) -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+    &#9776;
+  </button>
+
+  <nav class="nav-menu" id="navMenu">
+    <ul>
+      <li><a href="#">Eid Glow Sale</a></li>
+      <li><a href="#">New Launch</a></li>
+      <li><a href="#">Bundles</a></li>
+      <li><a href="#">Build Your Bundle</a></li>
+      <li><a href="#">Best Sellers</a></li>
+      <li><a href="#">Track Order</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-icons">
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="Whatsapp"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/54/54481.png" alt="Search"></a>
+  </div>
+</header>
+
+<!-- HERO SLIDER -->
+<div class="slider">
+  <div class="slides">
+    <img src="maz1.jpg" alt="Slide 1">
+    <img src="maz2.jpg" alt="Slide 2">
+    <img src="maz3.jpg" alt="Slide 3">
+    <img src="maz4.jpg" alt="Slide 4">
+    <img src="maz1.jpg" alt="Slide 1 duplicate">
+  </div>
+</div>
+
+<!-- PICK YOUR PERFECT MATCH -->
+<div class="shop-category-wrapper">
+  <h2 class="shop-category-heading">Pick Your Perfect Match</h2>
+</div>
+
+<div class="tab-buttons">
+  <button class="tab-button active" data-tab="new-launch">New Launch</button>
+  <button class="tab-button" data-tab="hair-care">Hair Care</button>
+  <button class="tab-button" data-tab="skin-care">Skin Care</button>
+  <button class="tab-button" data-tab="skin-brightening">Skin Brightening</button>
+  <button class="tab-button" data-tab="serums">Serums</button>
+  <button class="tab-button" data-tab="moisturisers">Moisturisers</button>
+</div>
+
+<!-- PRODUCTS GRID -->
+<div class="products-section">
+
+  <div class="tab-content active" id="new-launch">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary"   src="LumexaFacewash1_medium.jpg" alt="Lumexa Facewash">
+        <img class="img-secondary" src="LumexaFacewash2_medium.jpg" alt="Lumexa Facewash alt">
+        <div class="product-hover-icons">
+          <span title="Quick View">&#128269;</span><span title="Compare">&#9878;</span>
+          <span title="Wishlist">&#9825;</span><span title="Zoom">&#128247;</span>
+        </div>
+      </div>
+      <p class="product-name">Lumexa Facewash</p>
+      <p class="product-price">RS.1,250.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>7 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary"   src="MazClarity.jpeg" alt="Mazclarity Micellar Foaming Facewash">
+        <img class="img-secondary" src="MazClarity2.jpeg" alt="Mazclarity alt">
+        <div class="product-hover-icons">
+          <span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span>
+        </div>
+      </div>
+      <p class="product-name">Mazclarity Micellar Foaming Facewash</p>
+      <p class="product-price">RS.1,798.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>6 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary"   src="SunPro.jpeg" alt="Sunpro Tinted Sunscreen SPF 50 PA+++">
+        <img class="img-secondary" src="SunPro2.jpeg" alt="Sunpro alt">
+        <div class="product-hover-icons">
+          <span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span>
+        </div>
+      </div>
+      <p class="product-name">Sunpro Tinted Sunscreen SPF 50 PA+++</p>
+      <p class="product-price">RS.1,798.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9734; <span>83 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary"   src="MetafilSerum.jpeg" alt="Metafil Hydrating Serum">
+        <img class="img-secondary" src="MetafilSerum2.jpeg" alt="Metafil Serum alt">
+        <div class="product-hover-icons">
+          <span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span>
+        </div>
+      </div>
+      <p class="product-name">Metafil Hydrating Serum</p>
+      <p class="product-price">RS.2,100.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>12 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="tab-content" id="hair-care">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="hair1.jpg" alt="Hair Care 1">
+        <img class="img-secondary" src="hair1b.jpg" alt="Hair Care 1 alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">FolioBoost Hair Serum</p><p class="product-price">RS.899.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>34 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="hair2.jpg" alt="Hair Care 2">
+        <img class="img-secondary" src="hair2b.jpg" alt="Hair Care 2 alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Deep Nourish Hair Mask</p><p class="product-price">RS.1,100.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9734; <span>19 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="tab-content" id="skin-care">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="metafil-os.jpg" alt="Metafil OS Cleanser">
+        <img class="img-secondary" src="metafil-os2.jpg" alt="Metafil OS Cleanser alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Metafil OS (Oily Skin) Cleanser</p><p class="product-price">RS.1,150.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>27 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="metafil-gentle.jpg" alt="Metafil Gentle Cleanser">
+        <img class="img-secondary" src="metafil-gentle2.jpg" alt="Metafil Gentle Cleanser alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Metafil Gentle Skin Cleanser</p><p class="product-price">RS.1,050.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9734; <span>15 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="tab-content" id="skin-brightening">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="Lumexa-Brightening-Gel.jpg" alt="Lumexa Brightening Gel">
+        <img class="img-secondary" src="Lumexa-Brightening-Gel2.jpg" alt="Lumexa Brightening Gel alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Lumexa Brightening Gel</p><p class="product-price">RS.2,298.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>44 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="Lumexa-Skin-Brightening-Serum.jpg" alt="Lumexa Brightening Serum">
+        <img class="img-secondary" src="Lumexa-Skin-Brightening-Serum2.jpg" alt="Lumexa Brightening Serum alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Lumexa Skin Brightening Serum</p><p class="product-price">RS.2,000.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>31 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="tab-content" id="serums">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="MetafilSerum.jpeg" alt="Metafil Hydrating Serum">
+        <img class="img-secondary" src="MetafilSerum2.jpeg" alt="alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Metafil Hydrating Serum</p><p class="product-price">RS.2,100.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>12 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="FolioBoost.jpg" alt="Folio Boost Serum">
+        <img class="img-secondary" src="FolioBoost2.jpg" alt="alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Folio Boost Serum</p><p class="product-price">RS.899.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9734; <span>22 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+  <div class="tab-content" id="moisturisers">
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="metafil-moisturising.jpg" alt="Metafil Moisturising Cream">
+        <img class="img-secondary" src="metafil-moisturising2.jpg" alt="alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Metafil Moisturising Cream</p><p class="product-price">RS.750.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>58 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="moist2.jpg" alt="SPF 30 Daily Moisturiser">
+        <img class="img-secondary" src="moist2b.jpg" alt="SPF 30 alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">SPF 30 Daily Moisturiser</p><p class="product-price">RS.1,350.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>23 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="moist3.jpg" alt="Deep Hydration Night Cream">
+        <img class="img-secondary" src="moist3b.jpg" alt="Deep Hydration Night Cream alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Deep Hydration Night Cream</p><p class="product-price">RS.1,600.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9734; <span>15 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img class="img-primary" src="moist4.jpg" alt="Oil-Free Gel Moisturiser">
+        <img class="img-secondary" src="moist4b.jpg" alt="Oil-Free Gel Moisturiser alt">
+        <div class="product-hover-icons"><span>&#128269;</span><span>&#9878;</span><span>&#9825;</span><span>&#128247;</span></div>
+      </div>
+      <p class="product-name">Oil-Free Gel Moisturiser</p><p class="product-price">RS.1,100.00</p>
+      <p class="product-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span>41 REVIEWS</span></p>
+      <a href="#" class="shop-now-btn">SHOP NOW</a>
+    </div>
+  </div>
+
+</div>
+
+<section class="best-sellers">
+  <div class="bs-header">
+    <div>
+      <h2 class="bs-title">BEST SELLERS</h2>
+      <p class="bs-subtitle">Buy Your Favorite Products Today</p>
+    </div>
+    <a href="#" class="bs-view-all">View All</a>
+  </div>
+  <div class="bs-reel-wrapper">
+    <div class="bs-reel-track">
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-os.jpg" alt="Metafil OS Cleanser"><img class="img-secondary" src="metafil-os2.jpg" alt="Metafil OS Cleanser alt"></div><p class="bs-name">Metafil OS (Oily Skin) Cleanser</p><p class="bs-price">RS.1,150.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-moisturising.jpg" alt="Metafil Moisturising Cream"><img class="img-secondary" src="metafil-moisturising2.jpg" alt="alt"></div><p class="bs-name">Metafil Moisturising Cream</p><p class="bs-price">RS.750.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-gentle.jpg" alt="Metafil Gentle Skin Cleanser"><img class="img-secondary" src="metafil-gentle2.jpg" alt="alt"></div><p class="bs-name">Metafil Gentle Skin Cleanser</p><p class="bs-price">RS.1,050.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="mazclarity-acne.jpg" alt="Mazclarity Anti Acne Cream"><img class="img-secondary" src="mazclarity-acne2.jpg" alt="alt"></div><p class="bs-name">Mazclarity Anti Acne Cream</p><p class="bs-price">RS.998.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="Lumexa-Brightening-Gel.jpg" alt="Lumexa Brightening Gel"><img class="img-secondary" src="Lumexa-Brightening-Gel2.jpg" alt="alt"></div><p class="bs-name">Lumexa Brightening Gel</p><p class="bs-price">RS.2298.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="FolioBoost.jpg" alt="Folio Boost Serum"><img class="img-secondary" src="FolioBoost2.jpg" alt="alt"></div><p class="bs-name">Folio Boost Serum</p><p class="bs-price">RS.899.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="Lumexa-Skin-Brightening-Serum.jpg" alt="Lumexa Skin Brightening Serum"><img class="img-secondary" src="Lumexa-Skin-Brightening-Serum2.jpg" alt="alt"></div><p class="bs-name">Lumexa Skin Brightening Serum</p><p class="bs-price">RS.2,000.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <!-- clones -->
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-os.jpg" alt="Metafil OS Cleanser"><img class="img-secondary" src="metafil-os2.jpg" alt="alt"></div><p class="bs-name">Metafil OS (Oily Skin) Cleanser</p><p class="bs-price">RS.1,150.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-moisturising.jpg" alt="Metafil Moisturising Cream"><img class="img-secondary" src="metafil-moisturising2.jpg" alt="alt"></div><p class="bs-name">Metafil Moisturising Cream</p><p class="bs-price">RS.750.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="metafil-gentle.jpg" alt="Metafil Gentle Skin Cleanser"><img class="img-secondary" src="metafil-gentle2.jpg" alt="alt"></div><p class="bs-name">Metafil Gentle Skin Cleanser</p><p class="bs-price">RS.1,050.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="mazclarity-acne.jpg" alt="Mazclarity Anti Acne Cream"><img class="img-secondary" src="mazclarity-acne2.jpg" alt="alt"></div><p class="bs-name">Mazclarity Anti Acne Cream</p><p class="bs-price">RS.998.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="Lumexa-Brightening-Gel.jpg" alt="Lumexa Brightening Gel"><img class="img-secondary" src="Lumexa-Brightening-Gel2.jpg" alt="alt"></div><p class="bs-name">Lumexa Brightening Gel</p><p class="bs-price">RS.2298.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="FolioBoost.jpg" alt="Folio Boost Serum"><img class="img-secondary" src="FolioBoost2.jpg" alt="alt"></div><p class="bs-name">Folio Boost Serum</p><p class="bs-price">RS.899.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+      <div class="bs-card"><div class="bs-image-wrap"><img class="img-primary" src="Lumexa-Skin-Brightening-Serum.jpg" alt="Lumexa Skin Brightening Serum"><img class="img-secondary" src="Lumexa-Skin-Brightening-Serum2.jpg" alt="alt"></div><p class="bs-name">Lumexa Skin Brightening Serum</p><p class="bs-price">RS.2,000.00</p><a href="#" class="add-to-cart-btn">ADD TO CART</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="bundle-banner">
+  <div class="bundle-image"><img src="bundle-banner.jpg" alt="Build Your Own Bundle"></div>
+  <div class="bundle-content">
+    <h3 class="bundle-heading">Create Your Perfect Skincare Bundle</h3>
+    <p class="bundle-text">Your skin isn't like anyone else's, so your routine shouldn't be either. With our "Build Your Own Bundle," you get the freedom to pick the products that truly suit your skin—whether you want hydration, glow, protection, or a simple everyday set. Mix, match, and create a routine that feels personal, effective, and completely you. And yes—enjoy exclusive savings while you're at it.</p>
+    <a href="#" class="bundle-btn">Build Your Bundle</a>
+  </div>
+</section>
+
+<div class="feature-icon-bar">
+  <div class="feature-item"><img src="https://cdn-icons-png.flaticon.com/512/2913/2913136.png" alt="Evidence Based Skincare"><span>EVIDENCE BASED SKINCARE</span></div>
+  <div class="feature-item"><img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Clinically Proven Results"><span>CLINICALLY PROVEN RESULTS</span></div>
+  <div class="feature-item"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Animal Cruelty Free"><span>ANIMAL CRUELTY FREE</span></div>
+  <div class="feature-item"><img src="https://cdn-icons-png.flaticon.com/512/2271/2271108.png" alt="Fast Shipping"><span>FAST SHIPPING</span></div>
+</div>
+
+<section class="newsletter">
+  <h3 class="newsletter-title">Newsletter</h3>
+  <p class="newsletter-sub">Subscribe to our mailing list for discount codes, exclusive offers, and more.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address" class="newsletter-input">
+    <button class="newsletter-btn">Submit &#10148;</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">CAREERS</a><a href="#">INTERNATIONAL</a><a href="#">TERMS OF SERVICE</a>
+    <a href="#">REFUND POLICY</a><a href="#">PRIVACY POLICY</a><a href="#">BLOG</a>
+    <a href="#">BECOME OUR BLOGGER</a><a href="#">UAE SHOP</a>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-socials">
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+  </div>
+  <div class="footer-apps">
+    <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play"></a>
+    <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store"></a>
+  </div>
+  <div class="footer-payments">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+  </div>
+</footer>
+
+<script>
+  /* ── TAB SWITCHING ── */
+  document.querySelectorAll('.tab-button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-button').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ── HAMBURGER MENU ── */
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var navMenu      = document.getElementById('navMenu');
+
+  hamburgerBtn.addEventListener('click', function() {
+    var isOpen = navMenu.classList.toggle('nav-open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    hamburgerBtn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+  });
+
+  /* BONUS: close menu when a nav link is clicked */
+  navMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navMenu.classList.remove('nav-open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.innerHTML = '&#9776;';
+    });
+  });
+</script>
+
+</body>
+</html>
