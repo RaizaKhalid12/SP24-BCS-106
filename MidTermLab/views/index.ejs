@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+
+<%# ── FREE SHIPPING BAR ── %>
+<%- include('partials/shippingBar') %>
+
+<%# ── HEADER (with hamburger nav) ── %>
+<%- include('partials/header') %>
+
+<%# ── HERO SLIDER ── %>
+<div class="slider">
+  <div class="slides">
+    <img src="/images/maz1.jpg" alt="Slide 1">
+    <img src="/images/maz2.jpg" alt="Slide 2">
+    <img src="/images/maz3.jpg" alt="Slide 3">
+    <img src="/images/maz4.jpg" alt="Slide 4">
+    <img src="/images/maz1.jpg" alt="Slide 1 duplicate">
+  </div>
+</div>
+
+<%# ── PICK YOUR PERFECT MATCH ── %>
+<div class="shop-category-wrapper">
+  <h2 class="shop-category-heading">Pick Your Perfect Match</h2>
+</div>
+
+<%# Tab buttons — keys of the products object become the tab IDs %>
+<div class="tab-buttons">
+  <% const tabs = Object.keys(products); %>
+  <% tabs.forEach(function(tab) { %>
+    <button
+      class="tab-button <%= tab === activeTab ? 'active' : '' %>"
+      data-tab="<%= tab %>">
+      <%= tab.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %>
+    </button>
+  <% }); %>
+</div>
+
+<%# ── PRODUCTS GRID ── EJS loops over server data %>
+<div class="products-section">
+  <% tabs.forEach(function(tab) { %>
+    <div class="tab-content <%= tab === activeTab ? 'active' : '' %>" id="<%= tab %>">
+      <% products[tab].forEach(function(p) { %>
+        <div class="product-card">
+          <div class="product-image-wrap">
+            <img class="img-primary"   src="/images/<%= p.img1 %>" alt="<%= p.name %>">
+            <img class="img-secondary" src="/images/<%= p.img2 %>" alt="<%= p.name %> alt">
+            <div class="product-hover-icons">
+              <span title="Quick View">&#128269;</span>
+              <span title="Compare">&#9878;</span>
+              <span title="Wishlist">&#9825;</span>
+              <span title="Zoom">&#128247;</span>
+            </div>
+          </div>
+          <p class="product-name"><%= p.name %></p>
+          <p class="product-price"><%= p.price %></p>
+          <p class="product-stars">
+            <%# Render filled stars then empty stars %>
+            <% for(let i = 0; i < p.stars; i++) { %>&#9733;<% } %>
+            <% for(let i = p.stars; i < 5; i++) { %>&#9734;<% } %>
+            <span><%= p.reviews %> REVIEWS</span>
+          </p>
+          <a href="#" class="shop-now-btn">SHOP NOW</a>
+        </div>
+      <% }); %>
+    </div>
+  <% }); %>
+</div>
+
+<%# ── BEST SELLERS infinite reel ── EJS loops over bestSellers data %>
+<section class="best-sellers">
+  <div class="bs-header">
+    <div>
+      <h2 class="bs-title">BEST SELLERS</h2>
+      <p class="bs-subtitle">Buy Your Favorite Products Today</p>
+    </div>
+    <a href="#" class="bs-view-all">View All</a>
+  </div>
+  <div class="bs-reel-wrapper">
+    <div class="bs-reel-track">
+      <%# reelItems = bestSellers duplicated for seamless loop %>
+      <% reelItems.forEach(function(item) { %>
+        <div class="bs-card">
+          <div class="bs-image-wrap">
+            <img class="img-primary"   src="/images/<%= item.img1 %>" alt="<%= item.name %>">
+            <img class="img-secondary" src="/images/<%= item.img2 %>" alt="<%= item.name %> alt">
+          </div>
+          <p class="bs-name"><%= item.name %></p>
+          <p class="bs-price"><%= item.price %></p>
+          <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<%# ── FEATURED DEALS (AJAX) ── %>
+<section class="featured-deals">
+  <div class="featured-deals-header">
+    <h2 class="featured-deals-title">&#128293; Featured <span>Deals</span></h2>
+    <button class="reload-deals-btn" id="reload-deals-btn">&#8635; Refresh Deals</button>
+  </div>
+  <%# Cards are injected here by jQuery AJAX (main.js) %>
+  <div id="featured-deals-grid">
+    <%# Skeletons shown by JS until API data arrives %>
+  </div>
+</section>
+
+<%# ── QUICK VIEW MODAL ── %>
+<div id="quickview-modal" role="dialog" aria-modal="true" aria-label="Product Quick View">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close">&times;</button>
+    <div class="modal-inner">
+      <div class="modal-img-wrap">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <div class="modal-info">
+        <p class="modal-category" id="modal-category"></p>
+        <h3 class="modal-name"    id="modal-name"></h3>
+        <p class="modal-price"    id="modal-price"></p>
+        <div class="modal-rating">
+          <span id="modal-stars"></span>
+          <span class="modal-rating-score" id="modal-rating-score"></span>
+          <span class="modal-rating-count" id="modal-rating-count"></span>
+        </div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <button class="modal-add-btn">&#128722; Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%# ── BUNDLE BANNER ── %>
+<section class="bundle-banner">
+  <div class="bundle-image">
+    <img src="/images/bundle-banner.jpg" alt="Build Your Own Bundle">
+  </div>
+  <div class="bundle-content">
+    <h3 class="bundle-heading">Create Your Perfect Skincare Bundle</h3>
+    <p class="bundle-text">Your skin isn't like anyone else's, so your routine shouldn't be either. With our "Build Your Own Bundle," you get the freedom to pick the products that truly suit your skin—whether you want hydration, glow, protection, or a simple everyday set. Mix, match, and create a routine that feels personal, effective, and completely you. And yes—enjoy exclusive savings while you're at it.</p>
+    <a href="#" class="bundle-btn">Build Your Bundle</a>
+  </div>
+</section>
+
+<%# ── FEATURE ICON BAR ── %>
+<div class="feature-icon-bar">
+  <div class="feature-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/2913/2913136.png" alt="Evidence Based Skincare">
+    <span>EVIDENCE BASED SKINCARE</span>
+  </div>
+  <div class="feature-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Clinically Proven Results">
+    <span>CLINICALLY PROVEN RESULTS</span>
+  </div>
+  <div class="feature-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Animal Cruelty Free">
+    <span>ANIMAL CRUELTY FREE</span>
+  </div>
+  <div class="feature-item">
+    <img src="https://cdn-icons-png.flaticon.com/512/2271/2271108.png" alt="Fast Shipping">
+    <span>FAST SHIPPING</span>
+  </div>
+</div>
+
+<%# ── NEWSLETTER ── %>
+<section class="newsletter">
+  <h3 class="newsletter-title">Newsletter</h3>
+  <p class="newsletter-sub">Subscribe to our mailing list for discount codes, exclusive offers, and more.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address" class="newsletter-input">
+    <button class="newsletter-btn">Submit &#10148;</button>
+  </div>
+</section>
+
+<%# ── FOOTER ── %>
+<%- include('partials/footer') %>
+
+<%# ── SCRIPTS ── %>
+<%- include('partials/scripts') %>
+
+</body>
+</html>
