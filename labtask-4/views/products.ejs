@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <%# A few small additions scoped only to the filter bar — no existing styles touched %>
+  <style>
+    /* ── FILTER BAR (new, scoped) ─────────────────────────── */
+    .catalog-hero {
+      text-align: center;
+      padding: 40px 40px 0;
+    }
+    .catalog-hero h1 {
+      font-size: 26px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .catalog-hero p { color: #777; font-size: 14px; margin: 0; }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+      padding: 24px 40px 0;
+    }
+    .filter-bar label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background: #fff;
+      height: 38px;
+    }
+    .filter-bar input:focus,
+    .filter-bar select:focus { outline: none; border-color: #00aeee; }
+
+    .filter-bar .f-search { flex: 1 1 180px; }
+    .filter-bar .f-cat    { flex: 1 1 150px; }
+    .filter-bar .f-price  { flex: 0 1 100px; }
+    .filter-bar .f-sort   { flex: 1 1 170px; }
+
+    .filter-bar .f-btns {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+    .btn-filter-apply {
+      background: #00aeee;
+      color: #fff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      height: 38px;
+      transition: background 0.2s;
+    }
+    .btn-filter-apply:hover { background: #008ec0; }
+    .btn-filter-clear {
+      background: #fff;
+      color: #555;
+      border: 1px solid #ccc;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      height: 38px;
+      transition: border-color 0.2s;
+    }
+    .btn-filter-clear:hover { border-color: #999; color: #333; }
+
+    .active-filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 12px 40px 0;
+      font-size: 12px;
+      color: #777;
+    }
+    .filter-tag {
+      background: #e8f7fd;
+      color: #00aeee;
+      border: 1px solid #b3e3f5;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ── CATALOG GRID WRAPPER (uses your existing classes) ── */
+    .catalog-grid-wrapper {
+      /* reuse your existing .products-section padding */
+      padding: 24px 40px 50px;
+    }
+    /* display:grid on the wrapper — same as tab-content.active */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* ── NO RESULTS ───────────────────────────────────────── */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #777;
+    }
+    .no-results h2 { font-size: 20px; color: #333; margin-bottom: 8px; }
+    .no-results a {
+      display: inline-block;
+      margin-top: 16px;
+      background: #00aeee;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* ── PAGINATION (matches your site colours) ───────────── */
+    .catalog-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 0 40px 40px;
+    }
+    .pg-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .pg-btn:hover:not(.pg-disabled):not(.pg-active) {
+      background: #e8f7fd;
+      border-color: #00aeee;
+      color: #00aeee;
+    }
+    .pg-btn.pg-active {
+      background: #00aeee;
+      border-color: #00aeee;
+      color: #fff;
+      cursor: default;
+    }
+    .pg-btn.pg-disabled {
+      color: #bbb;
+      cursor: not-allowed;
+      background: #fafafa;
+    }
+    .pagination-info {
+      text-align: center;
+      color: #888;
+      font-size: 12px;
+      padding-bottom: 20px;
+    }
+
+    /* ── RESPONSIVE (mirrors your existing breakpoints) ───── */
+    @media (max-width: 1024px) {
+      .filter-bar, .catalog-hero,
+      .active-filter-tags, .catalog-grid-wrapper,
+      .catalog-pagination { padding-left: 20px; padding-right: 20px; }
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    @media (max-width: 768px) {
+      .filter-bar, .catalog-hero,
+      .active-filter-tags, .catalog-grid-wrapper,
+      .catalog-pagination { padding-left: 16px; padding-right: 16px; }
+      .filter-bar { flex-direction: column; }
+      .filter-bar .f-search,
+      .filter-bar .f-cat,
+      .filter-bar .f-price,
+      .filter-bar .f-sort  { flex: 1 1 100%; }
+      .filter-bar .f-price { flex: 1 1 calc(50% - 6px); }
+      .filter-bar .f-btns  { width: 100%; }
+      .btn-filter-apply, .btn-filter-clear { flex: 1; text-align: center; justify-content: center; }
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+    @media (max-width: 480px) {
+      .catalog-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<%- include('partials/header') %>
+<%- include('partials/shippingBar') %>
+
+<!-- ── PAGE HERO ──────────────────────────────────── -->
+<div class="catalog-hero">
+  <h1>All Products</h1>
+  <p><%= totalProducts %> product<%= totalProducts !== 1 ? 's' : '' %> found</p>
+</div>
+
+<!-- ── FILTER BAR ─────────────────────────────────── -->
+<form class="filter-bar" method="GET" action="/products">
+
+  <div class="f-search">
+    <label for="search">Search</label>
+    <input
+      type="text"
+      id="search"
+      name="search"
+      placeholder="e.g. serum, facewash..."
+      value="<%= currentSearch %>"
+    >
+  </div>
+
+  <div class="f-cat">
+    <label for="category">Category</label>
+    <select id="category" name="category">
+      <option value="">All Categories</option>
+      <% categories.forEach(function(cat) { %>
+        <option value="<%= cat %>" <%= currentCategory === cat ? 'selected' : '' %>>
+          <%= cat %>
+        </option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="f-price">
+    <label for="min">Min (Rs.)</label>
+    <input type="number" id="min" name="min" placeholder="0"
+      value="<%= currentMin %>" min="0">
+  </div>
+
+  <div class="f-price">
+    <label for="max">Max (Rs.)</label>
+    <input type="number" id="max" name="max" placeholder="Any"
+      value="<%= currentMax %>" min="0">
+  </div>
+
+  <div class="f-sort">
+    <label for="sort">Sort By</label>
+    <select id="sort" name="sort">
+      <option value="">Default</option>
+      <option value="price_asc"   <%= currentSort === 'price_asc'   ? 'selected' : '' %>>Price: Low → High</option>
+      <option value="price_desc"  <%= currentSort === 'price_desc'  ? 'selected' : '' %>>Price: High → Low</option>
+      <option value="rating_desc" <%= currentSort === 'rating_desc' ? 'selected' : '' %>>Rating: High → Low</option>
+    </select>
+  </div>
+
+  <div class="f-btns">
+    <button type="submit" class="btn-filter-apply">Apply</button>
+    <a href="/products" class="btn-filter-clear">Clear</a>
+  </div>
+
+</form>
+
+<!-- ── ACTIVE FILTER TAGS ──────────────────────────── -->
+<% const hasFilters = currentSearch || currentCategory || currentMin || currentMax || currentSort; %>
+<% if (hasFilters) { %>
+<div class="active-filter-tags">
+  <span>Active:</span>
+  <% if (currentSearch)   { %><span class="filter-tag">Search: "<%= currentSearch %>"</span><% } %>
+  <% if (currentCategory) { %><span class="filter-tag">Category: <%= currentCategory %></span><% } %>
+  <% if (currentMin)      { %><span class="filter-tag">Min: Rs.<%= currentMin %></span><% } %>
+  <% if (currentMax)      { %><span class="filter-tag">Max: Rs.<%= currentMax %></span><% } %>
+  <% if (currentSort === 'price_asc')   { %><span class="filter-tag">Price ↑</span><% } %>
+  <% if (currentSort === 'price_desc')  { %><span class="filter-tag">Price ↓</span><% } %>
+  <% if (currentSort === 'rating_desc') { %><span class="filter-tag">Rating ↓</span><% } %>
+</div>
+<% } %>
+
+<!-- ── PRODUCT GRID ─────────────────────────────────── -->
+<div class="catalog-grid-wrapper">
+  <% if (products.length === 0) { %>
+
+    <div class="no-results">
+      <h2>No products found</h2>
+      <p>Try adjusting your search or filters.</p>
+      <a href="/products">View All Products</a>
+    </div>
+
+  <% } else { %>
+
+    <%#
+      Uses YOUR EXACT card HTML from index.ejs:
+      .product-card > .product-image-wrap > img.img-primary + img.img-secondary
+                    + .product-hover-icons
+      .product-name  .product-price  .product-stars  .shop-now-btn
+      — zero CSS changes needed.
+    %>
+    <div class="catalog-grid">
+      <% products.forEach(function(p) { %>
+        <div class="product-card">
+          <div class="product-image-wrap">
+            <img class="img-primary"   src="/images/<%= p.img1 %>" alt="<%= p.name %>">
+            <img class="img-secondary" src="/images/<%= p.img2 %>" alt="<%= p.name %> alt">
+            <div class="product-hover-icons">
+              <span title="Quick View">&#128269;</span>
+              <span title="Compare">&#9878;</span>
+              <span title="Wishlist">&#9825;</span>
+              <span title="Zoom">&#128247;</span>
+            </div>
+          </div>
+
+          <p class="product-name"><%= p.name %></p>
+          <p class="product-price">Rs. <%= p.price.toLocaleString() %></p>
+
+          <p class="product-stars">
+            <% const full  = Math.floor(p.rating); %>
+            <% const empty = 5 - full; %>
+            <% for (let i = 0; i < full;  i++) { %>&#9733;<% } %>
+            <% for (let i = 0; i < empty; i++) { %>&#9734;<% } %>
+            <span><%= p.reviews %> REVIEWS</span>
+          </p>
+
+          <a href="#" class="shop-now-btn">SHOP NOW</a>
+        </div>
+      <% }) %>
+    </div>
+
+  <% } %>
+</div>
+
+<!-- ── PAGINATION ──────────────────────────────────── -->
+<% if (totalPages > 1) { %>
+<%
+  // Build a URL keeping all current filters, only changing ?page=N
+  function pageUrl(n) {
+    const p = new URLSearchParams();
+    if (currentSearch)   p.set('search',   currentSearch);
+    if (currentCategory) p.set('category', currentCategory);
+    if (currentMin)      p.set('min',      currentMin);
+    if (currentMax)      p.set('max',      currentMax);
+    if (currentSort)     p.set('sort',     currentSort);
+    p.set('page', n);
+    return '/products?' + p.toString();
+  }
+%>
+
+<nav class="catalog-pagination">
+
+  <% if (currentPage > 1) { %>
+    <a href="<%= pageUrl(currentPage - 1) %>" class="pg-btn">← Prev</a>
+  <% } else { %>
+    <span class="pg-btn pg-disabled">← Prev</span>
+  <% } %>
+
+  <% pageNumbers.forEach(function(num) { %>
+    <% if (num === currentPage) { %>
+      <span class="pg-btn pg-active"><%= num %></span>
+    <% } else { %>
+      <a href="<%= pageUrl(num) %>" class="pg-btn"><%= num %></a>
+    <% } %>
+  <% }) %>
+
+  <% if (currentPage < totalPages) { %>
+    <a href="<%= pageUrl(currentPage + 1) %>" class="pg-btn">Next →</a>
+  <% } else { %>
+    <span class="pg-btn pg-disabled">Next →</span>
+  <% } %>
+
+</nav>
+
+<p class="pagination-info">
+  Page <%= currentPage %> of <%= totalPages %>
+  &nbsp;·&nbsp;
+  Showing <%= (currentPage - 1) * 8 + 1 %>–<%= Math.min(currentPage * 8, totalProducts) %>
+  of <%= totalProducts %> products
+</p>
+<% } %>
+
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>
+
+</body>
+</html>
+

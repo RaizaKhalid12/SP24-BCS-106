@@ -1,0 +1,86 @@
+<%# views/admin/dashboard.ejs — lists all products in a table %>
+<%- include('partials/layout-top', { activePage: 'dashboard' }) %>
+
+<div class="admin-page-header">
+  <div>
+    <h1 class="admin-page-title">Products</h1>
+    <p class="admin-page-sub"><%= products.length %> product<%= products.length !== 1 ? 's' : '' %> in database</p>
+  </div>
+  <a href="/admin/products/new" class="admin-btn admin-btn-primary">+ Add Product</a>
+</div>
+
+<% if (success) { %>
+  <div class="admin-alert admin-alert-success"><%= success %></div>
+<% } %>
+
+<% if (products.length === 0) { %>
+  <div class="admin-empty">
+    <p>No products found.</p>
+    <a href="/admin/products/new" class="admin-btn admin-btn-primary">Add your first product</a>
+  </div>
+<% } else { %>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price (RS)</th>
+          <th>Rating</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(function(product) { %>
+          <tr>
+            <td>
+              <% if (product.img1) { %>
+                <img src="<%= product.img1.startsWith('/uploads') ? product.img1 : '/images/' + product.img1 %>"
+                     alt="<%= product.name %>"
+                     class="admin-table-img">
+              <% } else { %>
+                <div class="admin-table-img-placeholder">No image</div>
+              <% } %>
+            </td>
+            <td class="admin-product-name"><%= product.name %></td>
+            <td><span class="admin-badge"><%= product.category %></span></td>
+            <td>RS.<%= product.price.toLocaleString() %></td>
+            <td>
+              <span class="admin-stars">
+                <% for(let i = 1; i <= 5; i++) { %>
+                  <span class="<%= i <= product.rating ? 'star-filled' : 'star-empty' %>">★</span>
+                <% } %>
+              </span>
+              (<%= product.rating %>)
+            </td>
+            <td>
+              <span class="<%= product.stock === 0 ? 'admin-out-of-stock' : product.stock < 10 ? 'admin-low-stock' : 'admin-in-stock' %>">
+                <%= product.stock %>
+              </span>
+            </td>
+            <td class="admin-actions">
+              <a href="/admin/products/edit/<%= product._id %>"
+                 class="admin-btn admin-btn-sm admin-btn-secondary">Edit</a>
+
+              <form method="POST" action="/admin/products/delete/<%= product._id %>"
+                    style="display:inline;"
+                    onsubmit="return confirmDelete('<%= product.name %>')">
+                <button type="submit" class="admin-btn admin-btn-sm admin-btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+
+<script>
+  function confirmDelete(name) {
+    return confirm('Are you sure you want to delete "' + name + '"?\n\nThis action cannot be undone.');
+  }
+</script>
+
+<%- include('partials/layout-bottom') %>

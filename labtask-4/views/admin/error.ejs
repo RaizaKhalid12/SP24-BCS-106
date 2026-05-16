@@ -1,0 +1,10 @@
+<%# views/admin/error.ejs — admin-specific error page %>
+<%- include('partials/layout-top', { activePage: '' }) %>
+
+<div class="admin-error-page">
+  <h1>⚠️ Error</h1>
+  <p><%= message || 'Something went wrong.' %></p>
+  <a href="/admin" class="admin-btn admin-btn-primary">← Back to Dashboard</a>
+</div>
+
+<%- include('partials/layout-bottom') %>

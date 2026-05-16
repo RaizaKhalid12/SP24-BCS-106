@@ -1,0 +1,152 @@
+<%# views/auth/login.ejs — Customer login page %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style3.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f7f7f7;
+      padding: 2rem 1rem;
+      font-family: 'Poppins', sans-serif;
+    }
+    .auth-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 420px;
+    }
+    .auth-logo {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .auth-logo img {
+      width: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .auth-title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 0.3rem;
+    }
+    .auth-sub {
+      text-align: center;
+      color: #888;
+      font-size: 0.88rem;
+      margin: 0 0 1.8rem;
+    }
+    .auth-alert {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      margin-bottom: 1.2rem;
+    }
+    .auth-alert-error   { background: #fff0f0; color: #c0392b; border: 1px solid #f5c6c6; }
+    .auth-alert-success { background: #f0fff4; color: #1e7e3e; border: 1px solid #b2dfdb; }
+    .auth-group { margin-bottom: 1.1rem; }
+    .auth-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 0.4rem;
+    }
+    .auth-group input {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .auth-group input:focus {
+      outline: none;
+      border-color: #222;
+    }
+    .auth-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+    .auth-btn:hover { background: #333; }
+    .auth-footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 1.5rem;
+    }
+    .auth-footer a { color: #1a1a1a; font-weight: 600; text-decoration: none; }
+    .auth-footer a:hover { text-decoration: underline; }
+    .auth-back { text-align: center; margin-top: 1rem; font-size: 0.82rem; }
+    .auth-back a { color: #888; text-decoration: none; }
+    .auth-back a:hover { color: #1a1a1a; }
+  </style>
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      <a href="/"><img src="/images/maztonologo.jpg" alt="Mazton"></a>
+    </div>
+
+    <h1 class="auth-title">Welcome Back</h1>
+    <p class="auth-sub">Sign in to your Mazton account</p>
+
+    <%# Flash messages — read from res.locals set by global middleware %>
+    <% if (flashError && flashError.length > 0) { %>
+      <div class="auth-alert auth-alert-error"><%= flashError[0] %></div>
+    <% } %>
+    <% if (flashSuccess && flashSuccess.length > 0) { %>
+      <div class="auth-alert auth-alert-success"><%= flashSuccess[0] %></div>
+    <% } %>
+
+    <form method="POST" action="/login">
+      <div class="auth-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               value="<%= (old && old.email) ? old.email : '' %>"
+               placeholder="you@example.com" required autofocus>
+      </div>
+      <div class="auth-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Your password" required>
+      </div>
+      <button type="submit" class="auth-btn">Login</button>
+    </form>
+
+    <p class="auth-footer">
+      Don't have an account? <a href="/register">Create one</a>
+    </p>
+    <div class="auth-back">
+      <a href="/">← Back to Site</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

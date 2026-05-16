@@ -1,0 +1,60 @@
+<%# views/partials/header.ejs — site header with dynamic auth nav %>
+<%# Auth links go in a separate auth-bar ABOVE the main header — no nav overflow %>
+
+<%# ── TOP AUTH BAR (thin strip above main header) ── %>
+<div class="auth-top-bar">
+  <div class="auth-top-bar__inner">
+    <% if (currentUser) { %>
+      <% if (isAdmin) { %>
+        <a href="/admin">⚙ Admin Panel</a>
+        <span class="auth-sep">|</span>
+      <% } %>
+      <a href="/profile">👤 <%= currentUser.name.split(' ')[0] %></a>
+      <span class="auth-sep">|</span>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/login">Login</a>
+      <span class="auth-sep">|</span>
+      <a href="/register">Register</a>
+    <% } %>
+  </div>
+</div>
+
+<%# ── FLASH MESSAGE BANNER ── %>
+<% if (flashError && flashError.length > 0) { %>
+  <div class="flash-bar flash-bar--error"><%= flashError[0] %></div>
+<% } %>
+<% if (flashSuccess && flashSuccess.length > 0) { %>
+  <div class="flash-bar flash-bar--success"><%= flashSuccess[0] %></div>
+<% } %>
+
+<%# ── MAIN HEADER (unchanged layout) ── %>
+<header class="header">
+  <div class="logo">
+    <a href="/"><img src="/images/maztonologo.jpg" alt="Mazton Skin Solutions"></a>
+  </div>
+
+  <%# Hamburger button — shown only on tablet/mobile via CSS %>
+  <button class="hamburger" id="hamburgerBtn"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="navMenu">&#9776;</button>
+
+  <nav class="nav-menu" id="navMenu">
+    <ul>
+      <li><a href="#">Eid Glow Sale</a></li>
+      <li><a href="#">New Launch</a></li>
+      <li><a href="/products">Products</a></li>
+      <li><a href="#">Bundles</a></li>
+      <li><a href="#">Build Your Bundle</a></li>
+      <li><a href="#">Best Sellers</a></li>
+      <li><a href="#">Track Order</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-icons">
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="Whatsapp"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart"></a>
+    <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/54/54481.png"   alt="Search"></a>
+  </div>
+</header>

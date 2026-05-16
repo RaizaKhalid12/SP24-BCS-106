@@ -1,0 +1,135 @@
+<%# views/admin/product-form.ejs — shared form for create & edit %>
+<%- include('partials/layout-top', { activePage: product && product._id ? 'edit' : 'new' }) %>
+
+<div class="admin-page-header">
+  <div>
+    <h1 class="admin-page-title">
+      <%= product && product._id ? 'Edit Product' : 'Add New Product' %>
+    </h1>
+    <p class="admin-page-sub">
+      <%= product && product._id ? 'Update the product details below' : 'Fill in the details to add a new product' %>
+    </p>
+  </div>
+  <a href="/admin" class="admin-btn admin-btn-secondary">← Back to Dashboard</a>
+</div>
+
+<% if (errors && errors.length > 0) { %>
+  <div class="admin-alert admin-alert-error">
+    <strong>Please fix the following errors:</strong>
+    <ul>
+      <% errors.forEach(function(err) { %>
+        <li><%= err %></li>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>
+
+<div class="admin-form-card">
+  <form method="POST" action="<%= formAction %>" enctype="multipart/form-data" novalidate>
+
+    <!-- Name -->
+    <div class="admin-form-group">
+      <label for="name">Product Name <span class="admin-required">*</span></label>
+      <input type="text" id="name" name="name"
+             value="<%= product ? product.name || '' : '' %>"
+             placeholder="e.g. Metafil Hydrating Serum"
+             required>
+    </div>
+
+    <!-- Price + Category row -->
+    <div class="admin-form-row">
+      <div class="admin-form-group">
+        <label for="price">Price (RS) <span class="admin-required">*</span></label>
+        <input type="number" id="price" name="price"
+               value="<%= product ? product.price || '' : '' %>"
+               placeholder="e.g. 1250"
+               min="0" step="0.01" required>
+      </div>
+
+      <div class="admin-form-group">
+        <label for="category">Category <span class="admin-required">*</span></label>
+        <select id="category" name="category" required>
+          <option value="">— Select a category —</option>
+          <% categories.forEach(function(cat) { %>
+            <option value="<%= cat %>"
+              <%= product && product.category === cat ? 'selected' : '' %>>
+              <%= cat %>
+            </option>
+          <% }); %>
+        </select>
+      </div>
+    </div>
+
+    <!-- Rating + Stock row -->
+    <div class="admin-form-row">
+      <div class="admin-form-group">
+        <label for="rating">Rating (0–5) <span class="admin-required">*</span></label>
+        <input type="number" id="rating" name="rating"
+               value="<%= product ? product.rating || '' : '' %>"
+               placeholder="e.g. 4.5"
+               min="0" max="5" step="0.1" required>
+      </div>
+
+      <div class="admin-form-group">
+        <label for="stock">Stock <span class="admin-required">*</span></label>
+        <input type="number" id="stock" name="stock"
+               value="<%= product ? product.stock || '' : '' %>"
+               placeholder="e.g. 50"
+               min="0" step="1" required>
+      </div>
+    </div>
+
+    <!-- Image upload -->
+    <div class="admin-form-group">
+      <label for="image">
+        Product Image
+        <% if (product && product._id) { %>
+          <span class="admin-form-hint">(leave blank to keep existing image)</span>
+        <% } else { %>
+          <span class="admin-form-hint">(jpg, jpeg, png, webp, gif — max 5MB)</span>
+        <% } %>
+      </label>
+
+      <% if (product && product.img1) { %>
+        <div class="admin-current-image">
+          <p class="admin-form-hint">Current image:</p>
+          <img src="<%= product.img1.startsWith('/uploads') ? product.img1 : '/images/' + product.img1 %>"
+               alt="Current product image"
+               class="admin-preview-img">
+        </div>
+      <% } %>
+
+      <input type="file" id="image" name="image"
+             accept="image/jpeg,image/jpg,image/png,image/webp,image/gif">
+      <div id="imagePreviewWrap" class="admin-image-preview-wrap" style="display:none;">
+        <p class="admin-form-hint">New image preview:</p>
+        <img id="imagePreview" src="" alt="Preview" class="admin-preview-img">
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="admin-form-actions">
+      <button type="submit" class="admin-btn admin-btn-primary">
+        <%= product && product._id ? 'Save Changes' : 'Add Product' %>
+      </button>
+      <a href="/admin" class="admin-btn admin-btn-secondary">Cancel</a>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Live image preview
+  document.getElementById('image').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      document.getElementById('imagePreview').src = ev.target.result;
+      document.getElementById('imagePreviewWrap').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  });
+</script>
+
+<%- include('partials/layout-bottom') %>
