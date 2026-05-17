@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <style>
+    .error-page {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 60vh; font-family: 'Poppins', sans-serif; text-align: center;
+      padding: 40px 20px;
+    }
+    .error-page h1 { font-size: 64px; color: #00aeee; margin: 0; }
+    .error-page h2 { font-size: 22px; color: #333; margin: 8px 0 12px; }
+    .error-page p  { color: #777; margin-bottom: 24px; }
+    .error-page a  {
+      background: #00aeee; color: #fff; padding: 10px 22px;
+      border-radius: 6px; text-decoration: none; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/shippingBar') %>
+  <%- include('partials/header') %>
+
+  <div class="error-page">
+    <div>
+      <h1>500</h1>
+      <h2>Server Error</h2>
+      <p><%= message || 'Something went wrong. Please try again.' %></p>
+      <a href="/products">← Back to Products</a>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/scripts') %>
+</body>
+</html>

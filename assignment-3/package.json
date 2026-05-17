@@ -1,0 +1,19 @@
+{
+  "name": "mazton-skin-solutions",
+  "version": "1.0.0",
+  "description": "Mazton Skin Solutions — Express + EJS + MongoDB product catalog",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "mongoose": "^8.24.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
